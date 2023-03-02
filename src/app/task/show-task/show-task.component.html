@@ -1,0 +1,58 @@
+
+  <!-- Add New Task trigger modal -->
+  <button type="button" class="btn btn-primary float-end m-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="modalAdd( )">
+    Add Task
+  </button>
+
+<!-- Show Task trigger modal -->
+<button type="button" class="btn btn-secondary float-end m-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Show Task Types
+  </button>
+
+  <table class="table table-striped">
+    <thead>
+        <th>Id</th>
+        <th>Type</th>
+        <th>Task</th>
+        <th>Status</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of taskList$|async">
+            <td>{{item.id}}</td>
+            <td>{{taskTypeMap.get(item.taskTypeId )}}</td>
+            <!-- <td>{{item.taskTypeId}}</td> -->
+            <td>{{item.taskName}}</td>
+            <td>{{item.status}}</td>
+        </tr>
+    </tbody>
+</table>
+  
+  <!-- Show Task Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Task Types</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p *ngFor="let type of taskTypeList$|async">{{type.id}} - {{type.typeName}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Add New Task Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">{{modalTitle}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <app-form-task></app-form-task>
+        </div>
+      </div>
+    </div>
+  </div>
