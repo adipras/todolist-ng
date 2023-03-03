@@ -1,5 +1,5 @@
 # Todolist Angular
-## .NET 6 Web API with Entity Framework Core and SQL Server
+API Project: [.NET 6 Web API with Entity Framework Core and SQL Server](https://github.com/adipras/todolist-api-netcore)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.18.
 
