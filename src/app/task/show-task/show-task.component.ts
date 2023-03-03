@@ -39,6 +39,40 @@ export class ShowTaskComponent implements OnInit {
     this.activateFormTaskComponent = true;
   }
 
+  modalEdit(item:any) {
+    this.task = item;
+    this.modalTitle = "Edit Task";
+    this.activateFormTaskComponent = true;
+  }
+
+  delete(item:any) {
+    if (confirm(`Are you sure you want to delete task "${item.taskName}"`)) {
+      this.service.deleteTask(item.id).subscribe(res => {
+        var closeModalBtn = document.getElementById('form-modal-close');
+        if(closeModalBtn) {
+          closeModalBtn.click();
+        }
+
+        var showDeleteSuccess = document.getElementById('delete-success-alert');
+        if (showDeleteSuccess) {
+          showDeleteSuccess.style.display = "block";
+        }
+
+        setTimeout(function() {
+          if (showDeleteSuccess) {
+            showDeleteSuccess.style.display = "none";
+          }
+        }, 4000);
+        this.taskList$ = this.service.getTaskList();
+      })
+    }
+  }
+
+  modalClose() {
+    this.activateFormTaskComponent = false;
+    this.taskList$ = this.service.getTaskList(); 
+  }
+
   refreshTaskTypeMap() {
     this.service.getTaskTypeList().subscribe(data => {
       this.taskTypeList = data;

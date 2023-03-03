@@ -1,8 +1,25 @@
 <form>
-    <div class="mb-3">
+    <div class="mb-3"> 
         <label for="taskTypeId" class="form-label">Task type</label>
+        <input type="text" class="form-control" name="taskTypeId" id="taskTypeId" [(ngModel)]="taskTypeId" *ngIf="task.id!=0" disabled>
         <select class="form-control" name="taskTypeId" id="taskTypeId" [(ngModel)]="taskTypeId" *ngIf="task.id==0">
             <option *ngFor="let type of taskTypeList$|async" [value]="type.id">{{type.typeName}}</option>
         </select>
     </div>
+    <div class="mb-3">
+        <label for="status" class="form-label">Status</label>
+        <select class="form-control" name="status" id="status" [(ngModel)]="status">
+            <option *ngFor="let status of statusList$|async" [value]="status.statusOption">{{status.statusOption}}</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="taskName" class="form-label">Task</label>
+        <input type="texxt" class="form-control" [(ngModel)]="taskName" name="taskName">
+    </div>
+    <button (click)="addTask()" *ngIf="task.id==0" class="btn btn-primary">
+        Add
+    </button>
+    <button (click)="updateTask()" *ngIf="task.id!=0" class="btn btn-primary">
+        Update
+    </button>
 </form>
